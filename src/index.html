@@ -1,0 +1,59 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Bonfire</title>
+        <meta name="viewport" content="width=600, user-scalable=no">
+        <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+        <meta http-equiv="Pragma" content="no-cache" />
+        <meta http-equiv="Expires" content="0" />
+        <link rel="icon" href="BFiconFinished.ico">
+        <script type="text/javascript" src="https://assets.gfycat.com/gfycat.js"></script>
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <script>
+            if (window.require) {
+                window.nodeRequire = require;
+                delete window.require;
+                delete window.exports;
+                delete window.module;
+            }
+        </script>
+    </head>
+    <body>
+        <div id="content">
+            <div id="input-bar">
+              <div contenteditable disabled id="input" class="white"></div>
+                <a id="settings" href="#settings-page" class="btn-floating btn-large modal-trigger">
+                    <i class="material-icons">settings</i>
+                </a>
+            </div>
+            <div id="messages">
+            </div>
+        </div>
+        <div id="settings-page" class="modal bottom-sheet">
+            <div class="modal-content">
+                <h4>Settings</h4>
+                <div class="row">
+                    <div class="input-field col s12 m4 l3">
+                        <input id="displayName" class="settings-input" type="text">
+                        <label class="active" for="displayName">Name</label>
+                    </div>
+                    <div class="input-field col s12 m4 l3">
+                        <input id="status" class="settings-input" type="text">
+                        <label class="active" for="status">Status</label>
+                    </div>
+                    <div class="col s12 m4 l3">
+                        <a id="dev-tools" class="btn" style="visibility: hidden">Open Dev Tools</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="seen-user-list">
+        </div>
+        <div class="progress orange lighten-2">
+            <div class="indeterminate orange darken-2"></div>
+        </div>
+        <div id="card-list">
+        </div>
+        <script src="./main.coffee"></script>
+    </body>
+</html>

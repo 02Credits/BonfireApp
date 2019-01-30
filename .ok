@@ -1,0 +1,1 @@
+compile: parcel build src/index.html -d www --public-url ./
