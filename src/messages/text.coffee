@@ -3,8 +3,8 @@ import arbiter from "promissory-arbiter"
 import linkify from "linkifyjs/string"
 import emoticons from "../emoticons"
 
-import renderTitle from "./title"
-import renderFileAttachments from "./fileAttachments"
+import title from "./title"
+import fileAttachments from "./fileAttachments"
 
 renderText = (text, author, id) ->
   classText = if text.indexOf(">") == 0 then ".greentext" else ""
@@ -25,24 +25,29 @@ renderText = (text, author, id) ->
         ondblclick: -> arbiter.publish "messages/startEdit", id
     }, m.trust(text)
 
-export default (doc) ->
-  title = await renderTitle doc
-  fileAttachments = await renderFileAttachments doc
-  if doc.text?
-    if Array.isArray(doc.text)
-      elements = [title]
-      for text in doc.text
-        elements.push(renderText(text.text, doc.author, text.id))
-      elements.push(fileAttachments)
-      elements
+export default
+  buildContext: (doc) ->
+    await title.buildContext doc
+    await fileAttachments.buildContext doc
+
+  render: (context) ->
+    renderedTitle = title.render doc
+    renderedFileAttachments = fileAttachments.render doc
+    if doc.text?
+      if Array.isArray(doc.text)
+        elements = [renderedTitle]
+        for text in doc.text
+          elements.push(renderText(text.text, doc.author, text.id))
+        elements.push(renderedFileAttachments)
+        elements
+      else
+        [
+          renderedTitle
+          renderText(doc.text, doc.author, doc._id)
+          renderedFileAttachments
+        ]
     else
       [
-        title
-        renderText(doc.text, doc.author, doc._id)
-        fileAttachments
+        renderedTitle
+        renderedFileAttachments
       ]
-  else
-    [
-      title
-      fileAttachments
-    ]
