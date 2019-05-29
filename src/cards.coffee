@@ -51,7 +51,7 @@ clickCard = (card) ->
     e.stopPropagation()
 
 export default () ->
-  $('body').click(closeCards)
-  m.render document.getElementById("card-list"),
-    for card in cards
-      m "img.memeCard", {src: card, onclick: clickCard(card)}
+  # $('body').click(closeCards)
+  # m.render document.getElementById("card-list"),
+  #   for card in cards
+  #     m "img.memeCard", {src: card, onclick: clickCard(card)}
