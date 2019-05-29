@@ -1,1 +1,2 @@
-compile: parcel build src/index.html -d www --public-url ./
+build: parcel build src/index.html -d www --public-url ./
+dev: parcel watch src/index.html -d www --public-url ./

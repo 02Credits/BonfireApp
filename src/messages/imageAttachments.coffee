@@ -6,6 +6,7 @@ db = new PouchDB('http://02credits.ddns.net:5984/attachments')
 
 export default
   buildContext: (doc) ->
+    thenables = []
     if doc.file? or doc.files?
       if (doc.file)
         doc.files = [doc.file]
@@ -21,5 +22,6 @@ export default
               resolve()
     await Promise.all(thenables)
   render: (context) ->
-    for imageAttachment in imageAttachments
-      m "img.materialboxed", {src: URL.createObjectURL(imageAttachment)}
+    if context.imageAttachments?
+      for imageAttachment in context.imageAttachments
+        m "img.materialboxed", {src: URL.createObjectURL(imageAttachment)}

@@ -11,9 +11,9 @@ export default
     if doc.text?
       if Array.isArray(doc.text)
         doc.links = []
-        for text in doc.text
-          if text.text.indexOf("<") != 0
-            for link in linkify.find(text.text)
+        for textElement in doc.text
+          if textElement.text.indexOf("<") != 0
+            for link in linkify.find(textElement.text)
               doc.links.push(link)
       else if doc.text.indexOf("<") != 0
         doc.links = linkify.find doc.text

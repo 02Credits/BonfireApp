@@ -31,19 +31,19 @@ export default
     await fileAttachments.buildContext doc
 
   render: (context) ->
-    renderedTitle = title.render doc
-    renderedFileAttachments = fileAttachments.render doc
-    if doc.text?
-      if Array.isArray(doc.text)
+    renderedTitle = title.render context
+    renderedFileAttachments = fileAttachments.render context
+    if context.text?
+      if Array.isArray(context.text)
         elements = [renderedTitle]
-        for text in doc.text
-          elements.push(renderText(text.text, doc.author, text.id))
+        for text in context.text
+          elements.push(renderText(text.text, context.author, text.id))
         elements.push(renderedFileAttachments)
         elements
       else
         [
           renderedTitle
-          renderText(doc.text, doc.author, doc._id)
+          renderText(context.text, context.author, context._id)
           renderedFileAttachments
         ]
     else

@@ -19,7 +19,7 @@ preventDrag = (event) => event.preventDefault()
 
 export default
   buildContext: (doc) ->
-    await imageAttachments.buildContext context
+    await imageAttachments.buildContext doc
 
   render: (context) ->
     m ".card-image", {width: "80%"}, [

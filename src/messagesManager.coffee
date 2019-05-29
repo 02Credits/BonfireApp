@@ -74,6 +74,7 @@ renderMessages = (messages, preventCombining) ->
   currentAuthor = {}
   currentMessage = null
   for message in messages
+    console.log(message)
     if !message.doc.text? or message.doc.text.startsWith("<")
       if currentMessage?
         groupedMessages.push(currentMessage)
@@ -97,16 +98,14 @@ renderMessages = (messages, preventCombining) ->
   if currentMessage?
     groupedMessages.push(currentMessage)
 
-  messagePromises = []
   for message in groupedMessages
-    renderedMessage = messageRenderer(message.doc)
-    if renderedMessage?
-      messagePromises.push(renderedMessage)
-  (Promise.all messagePromises).then () ->
-    m.render $('#messages').get(0),
-      m "div", container.render message for message in groupedMessages
-    materialize.AutoInit();
-    arbiter.publish("messages/rendered")
+    if message?
+      await messageContainer.buildContext(message.doc);
+
+  m.render $('#messages').get(0),
+    m "div", messageContainer.render message.doc for message in groupedMessages
+  materialize.AutoInit()
+  arbiter.publish("messages/rendered")
 
 render()
 remoteChanges = remoteDB.changes

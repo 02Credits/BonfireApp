@@ -8,10 +8,10 @@ export default
     await dubs.buildContext doc
 
   render: (context) ->
-    if doc.time?
-      time = moment.utc(doc.time).local()
+    if context.time?
+      time = moment.utc(context.time).local()
       timeText = time.format("M/D/h:mm")
-      m "p.time-stamp.black-text.right", [
+      m "p.time-stamp.black-text", [
         timeText
         dubs.render context
       ]
